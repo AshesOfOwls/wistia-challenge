@@ -3,25 +3,25 @@ const getElementByVideoId = function (videoId) {
 };
 
 Wistia.plugin("autoplay-delay-plugin", function(video, options) {
-  const togglePlaying = function (isPlaying) {
+
+  console.log("VIDEO IS 1", video.data.media.hashedId)
+  
+  const setPlaying = function (isPlaying) {
+    const previousEl = document.querySelector('.playing');
     const el = getElementByVideoId(video.data.media.hashedId);
 
-    if (isPlaying) {
-      el.classList.add('playing');
-    } else {
-      el.classList.remove('playing');
+    if (previousEl) {
+      previousEl.classList.remove('playing');
     }
+
+    el.classList.add('playing');
   }
 
   video.bind("play", function() {
-    togglePlaying(true);
+    setPlaying();
   });
 
-  video.bind("pause", function() {
-    togglePlaying(false);
-  });
-
-  video.bind("end", function() {
-    togglePlaying();
+  video.bind("beforeremove", function() {
+    return video.unbind();
   });
 });

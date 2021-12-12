@@ -36,3 +36,11 @@ header {
   display: flex;
   align-items: center;
 }
+
+.playIcon {
+  display: none;
+}
+
+.playing .playIcon {
+  display: block;
+}
