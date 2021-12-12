@@ -1,17 +1,5 @@
 'use strict';
 
-var ActiveVideo = {
-  video: null,
-
-  setVideo: function (video) {
-    this.video = video;
-  },
-
-  getId: function () {
-    return this.video.data.media.hashedId;
-  }
-};
-
 var Playlist = {
   getMedias: function() {
     var url = new URL('https://api.wistia.com/v1/medias.json');
@@ -35,26 +23,6 @@ var Playlist = {
 
     document.getElementById('medias').appendChild(el);
   },
-
-  getVideoElement: function () {
-    const videoId = ActiveVideo.getId();
-    const el = document.querySelector(`[data-videoid=${videoId}]`);
-    return el;
-  },
-  
-  setCurrentlyPlaying: function () {
-    const videoId = ActiveVideo.getId();
-    const el = this.getVideoElement(videoId);
-
-    el.classList.add('playing');
-  },
-
-  removeCurrentlyPlaying: function () {
-    const videoId = ActiveVideo.getId();
-    const el = this.getVideoElement(videoId);
-
-    el.classList.remove('playing');
-  }
 };
 
 var Player = {
@@ -72,54 +40,7 @@ var Player = {
           }
         }
       },
-      onReady: function (video) {
-        console.log("ON READY")
-        self.setActiveVideo(video);
-      },
     });
-  },
-
-  setActiveVideo: function (video) {
-    this.removeActiveVideo();
-
-    ActiveVideo.setVideo(video);
-    this.createVideoListeners();
-  },
-
-  removeActiveVideo: function () {
-    if (!ActiveVideo.video) return;
-
-    this.onVideoEnd();
-    this.destroyVideoListeners();
-  },
-
-  createVideoListeners: function () {
-    const video = ActiveVideo.video;
-
-    video.bind('play', this.onVideoPlay);
-    video.bind('end', this.onVideoEnd);
-    video.bind('beforereplace', this.onVideoReplace.bind(this));
-  },
-
-  destroyVideoListeners: function () {
-    const video = ActiveVideo.video;
-
-    video.unbind('play', this.onVideoPlay);
-    video.unbind('end', this.onVideoEnd);
-    video.unbind('beforereplace', this.onVideoReplace.bind(this));
-  },
-
-  onVideoPlay: function () {
-    Playlist.setCurrentlyPlaying();
-  },
-
-  onVideoEnd: function () {
-    Playlist.removeCurrentlyPlaying();
-  },
-
-  onVideoReplace: function () {
-    this.removeActiveVideo()
-    console.log("BEFORE VIDEO REPLACED");
   },
 };
 
