@@ -30,6 +30,13 @@ header {
 
 .media {
   margin-bottom: 12px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.media.playing {
+  background: #EEE;
 }
 
 .media-content {
@@ -37,8 +44,23 @@ header {
   align-items: center;
 }
 
+.description .title {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-width: 100%;
+}
+
+.playStatus {
+  width: 25px;
+  flex: 0 0 auto;
+}
+
 .playIcon {
   display: none;
+  padding: 5px
 }
 
 .playing .playIcon {
