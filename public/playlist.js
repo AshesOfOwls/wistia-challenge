@@ -18,7 +18,7 @@ var Playlist = {
     el.querySelector('.duration').innerText = Utils.formatTime(media.duration);
     el.querySelector('.media-content').setAttribute(
       'href',
-      '#wistia_' + media.hashed_id + '?autoPlay=false'
+      '#wistia_' + media.hashed_id
     );
 
     document.getElementById('medias').appendChild(el);
