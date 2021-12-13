@@ -19,9 +19,33 @@ header {
   padding: 0 60px;
 }
 
+.thumbnailWrapper {
+  position: relative;
+  display: inline-block;
+  margin-right: 12px;
+}
+
 .thumbnail {
   height: 56px;
-  margin-right: 12px;
+  position: relative;
+  display: block;
+}
+
+.playing .thumbnailWrapper::after  {
+  background-color: rgba(0,0,0,0.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  letter-spacing: .1em;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  content: 'Playing';
 }
 
 .wistia_embed {
@@ -33,10 +57,6 @@ header {
   padding: 5px;
   display: flex;
   align-items: center;
-}
-
-.media.playing {
-  background: #EEE;
 }
 
 .media-content {
@@ -51,20 +71,6 @@ header {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   max-width: 100%;
-}
-
-.playStatus {
-  width: 25px;
-  flex: 0 0 auto;
-}
-
-.playIcon {
-  display: none;
-  padding: 5px
-}
-
-.playing .playIcon {
-  display: block;
 }
 
 .autoplay-delay {
